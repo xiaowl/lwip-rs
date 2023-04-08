@@ -44,7 +44,8 @@ fn compile_lwip_library() {
         .file("src/lwip/src/core/ipv6/ip6_addr.c")
         .file("src/lwip/src/core/ipv6/ip6_frag.c")
         .file("src/lwip/src/core/ipv6/mld6.c")
-        .file("src/lwip/src/core/ipv6/nd6.c");
+        .file("src/lwip/src/core/ipv6/nd6.c")
+        .file("src/lwip-opts/platform.c");
     build.include("src/lwip/src/include");
     build.include("src/lwip-opts");
     build.debug(false);

@@ -85,4 +85,10 @@
 #define TCP_OUTPUT_DEBUG LWIP_DBG_ON
 */
 
+#ifdef ANDROID
+#include <android/log.h>
+void lwip_android_log(const char *fmt, ...);
+#define LWIP_PLATFORM_DIAG(x) lwip_android_log x
+#endif
+
 #endif
