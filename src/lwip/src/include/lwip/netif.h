@@ -110,7 +110,7 @@ extern "C" {
  * addressed to this netif. This is used for vpn tunnels and similar
  * */
 #ifdef LWIP_NETIF_ACCEPT_ALL
-#define NETIF_FLAG_ACCEPT_ALL 0x100U
+#define NETIF_FLAG_ACCEPT_ALL 0x80U
 #endif
 
 /**
