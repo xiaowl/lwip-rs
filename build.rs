@@ -57,6 +57,7 @@ fn generate_lwip_bindings() {
     println!("cargo:rerun-if-changed=src/lwip-opts");
     let builder = bindgen::Builder::default()
         .header("src/lwip/src/include/lwip/init.h")
+        .header("src/lwip/src/include/lwip/tcpip.h")
         .header("src/lwip/src/include/lwip/tcp.h")
         .header("src/lwip/src/include/lwip/udp.h")
         .header("src/lwip/src/include/lwip/netif.h")
