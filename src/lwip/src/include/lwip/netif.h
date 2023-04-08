@@ -106,6 +106,13 @@ extern "C" {
  * Set by the netif driver in its init function. */
 #define NETIF_FLAG_MLD6         0x40U
 
+/** If set, the netif will accept all packets, even if they are not
+ * addressed to this netif. This is used for vpn tunnels and similar
+ * */
+#ifdef LWIP_NETIF_ACCEPT_ALL
+#define NETIF_FLAG_ACCEPT_ALL 0x100U
+#endif
+
 /**
  * @}
  */

@@ -648,6 +648,12 @@ ip4_input(struct pbuf *p, struct netif *inp)
     }
   }
 
+#ifdef LWIP_NETIF_ACCEPT_ALL
+  if (netif == NULL && inp->flags & NETIF_FLAG_ACCEPT_ALL) {
+    netif = inp;
+  }
+#endif
+
   /* packet not for us? */
   if (netif == NULL) {
     /* packet not for us, route or discard */
