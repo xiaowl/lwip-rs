@@ -37,6 +37,7 @@ pub const MEMP_MEM_MALLOC: u32 = 1;
 pub const LWIP_PERF: u32 = 0;
 pub const SYS_LIGHTWEIGHT_PROT: u32 = 0;
 pub const IPV6_FRAG_COPYHEADER: u32 = 1;
+pub const LWIP_DEBUG: u32 = 1;
 pub const LITTLE_ENDIAN: u32 = 1234;
 pub const BIG_ENDIAN: u32 = 4321;
 pub const BYTE_ORDER: u32 = 1234;
@@ -919,6 +920,7 @@ pub const ARP_TABLE_SIZE: u32 = 10;
 pub const ARP_MAXAGE: u32 = 300;
 pub const ARP_QUEUE_LEN: u32 = 3;
 pub const ETHARP_SUPPORT_VLAN: u32 = 0;
+pub const LWIP_VLAN_PCP: u32 = 0;
 pub const LWIP_ETHERNET: u32 = 0;
 pub const ETH_PAD_SIZE: u32 = 0;
 pub const ETHARP_SUPPORT_STATIC_ENTRIES: u32 = 0;
@@ -936,6 +938,7 @@ pub const ICMP_TTL: u32 = 255;
 pub const LWIP_BROADCAST_PING: u32 = 0;
 pub const LWIP_MULTICAST_PING: u32 = 0;
 pub const RAW_TTL: u32 = 255;
+pub const LWIP_DHCP_DOES_ACD_CHECK: u32 = 0;
 pub const LWIP_DHCP_BOOTP_FILE: u32 = 0;
 pub const LWIP_DHCP_GET_NTP_SRV: u32 = 0;
 pub const LWIP_DHCP_MAX_NTP_SERVERS: u32 = 1;
@@ -963,6 +966,7 @@ pub const TCP_QUEUE_OOSEQ: u32 = 1;
 pub const LWIP_TCP_SACK_OUT: u32 = 0;
 pub const LWIP_TCP_MAX_SACK_NUM: u32 = 4;
 pub const TCP_CALCULATE_EFF_SEND_MSS: u32 = 1;
+pub const LWIP_TCP_RTO_TIME: u32 = 3000;
 pub const TCP_OOSEQ_MAX_BYTES: u32 = 0;
 pub const TCP_OOSEQ_MAX_PBUFS: u32 = 0;
 pub const TCP_LISTEN_BACKLOG: u32 = 0;
@@ -1008,6 +1012,7 @@ pub const LWIP_NETCONN_FULLDUPLEX: u32 = 0;
 pub const LWIP_COMPAT_SOCKETS: u32 = 1;
 pub const LWIP_POSIX_SOCKETS_IO_NAMES: u32 = 1;
 pub const LWIP_SOCKET_OFFSET: u32 = 0;
+pub const LWIP_SOCKET_EXTERNAL_HEADERS: u32 = 0;
 pub const LWIP_TCP_KEEPALIVE: u32 = 0;
 pub const LWIP_SO_SNDTIMEO: u32 = 0;
 pub const LWIP_SO_RCVTIMEO: u32 = 0;
@@ -1083,7 +1088,6 @@ pub const LWIP_DHCP6_MAX_DNS_SERVERS: u32 = 2;
 pub const LWIP_DBG_MIN_LEVEL: u32 = 0;
 pub const LWIP_DBG_TYPES_ON: u32 = 128;
 pub const ETHARP_DEBUG: u32 = 0;
-pub const NETIF_DEBUG: u32 = 0;
 pub const PBUF_DEBUG: u32 = 0;
 pub const API_LIB_DEBUG: u32 = 0;
 pub const API_MSG_DEBUG: u32 = 0;
@@ -1091,20 +1095,16 @@ pub const SOCKETS_DEBUG: u32 = 0;
 pub const ICMP_DEBUG: u32 = 0;
 pub const IGMP_DEBUG: u32 = 0;
 pub const INET_DEBUG: u32 = 0;
-pub const IP_DEBUG: u32 = 0;
 pub const IP_REASS_DEBUG: u32 = 0;
 pub const RAW_DEBUG: u32 = 0;
 pub const MEM_DEBUG: u32 = 0;
 pub const MEMP_DEBUG: u32 = 0;
 pub const SYS_DEBUG: u32 = 0;
 pub const TIMERS_DEBUG: u32 = 0;
-pub const TCP_DEBUG: u32 = 0;
-pub const TCP_INPUT_DEBUG: u32 = 0;
 pub const TCP_FR_DEBUG: u32 = 0;
 pub const TCP_RTO_DEBUG: u32 = 0;
 pub const TCP_CWND_DEBUG: u32 = 0;
 pub const TCP_WND_DEBUG: u32 = 0;
-pub const TCP_OUTPUT_DEBUG: u32 = 0;
 pub const TCP_RST_DEBUG: u32 = 0;
 pub const TCP_QLEN_DEBUG: u32 = 0;
 pub const UDP_DEBUG: u32 = 0;
@@ -1112,13 +1112,14 @@ pub const TCPIP_DEBUG: u32 = 0;
 pub const SLIP_DEBUG: u32 = 0;
 pub const DHCP_DEBUG: u32 = 0;
 pub const AUTOIP_DEBUG: u32 = 0;
+pub const ACD_DEBUG: u32 = 0;
 pub const DNS_DEBUG: u32 = 0;
 pub const IP6_DEBUG: u32 = 0;
 pub const DHCP6_DEBUG: u32 = 0;
 pub const LWIP_TESTMODE: u32 = 0;
 pub const LWIP_VERSION_MAJOR: u32 = 2;
-pub const LWIP_VERSION_MINOR: u32 = 1;
-pub const LWIP_VERSION_REVISION: u32 = 4;
+pub const LWIP_VERSION_MINOR: u32 = 2;
+pub const LWIP_VERSION_REVISION: u32 = 0;
 pub const LWIP_RC_RELEASE: u32 = 255;
 pub const LWIP_RC_DEVELOPMENT: u32 = 0;
 pub const LWIP_VERSION_STRING_SUFFIX: &[u8; 2usize] = b"d\0";
@@ -1203,6 +1204,7 @@ pub const NETIF_FLAG_ETHARP: u32 = 8;
 pub const NETIF_FLAG_ETHERNET: u32 = 16;
 pub const NETIF_FLAG_IGMP: u32 = 32;
 pub const NETIF_FLAG_MLD6: u32 = 64;
+pub const NETIF_FLAG_ACCEPT_ALL: u32 = 256;
 pub const NETIF_ADDR_IDX_MAX: u32 = 127;
 pub const LWIP_NETIF_USE_HINTS: u32 = 0;
 pub const NETIF_NO_INDEX: u32 = 0;
@@ -1217,6 +1219,7 @@ pub const LWIP_NSC_IPV4_NETMASK_CHANGED: u32 = 64;
 pub const LWIP_NSC_IPV4_SETTINGS_CHANGED: u32 = 128;
 pub const LWIP_NSC_IPV6_SET: u32 = 256;
 pub const LWIP_NSC_IPV6_ADDR_STATE_CHANGED: u32 = 512;
+pub const LWIP_NSC_IPV4_ADDR_VALID: u32 = 1024;
 pub const IP_HLEN: u32 = 20;
 pub const IP_HLEN_MAX: u32 = 60;
 pub const IP_RF: u32 = 32768;
@@ -6372,6 +6375,9 @@ pub const err_enum_t_ERR_ARG: err_enum_t = -16;
 #[doc = " Definitions for error constants."]
 pub type err_enum_t = ::std::os::raw::c_int;
 pub type err_t = s8_t;
+extern "C" {
+    pub fn lwip_strerr(err: err_t) -> *const ::std::os::raw::c_char;
+}
 #[doc = " Includes spare room for transport layer header, e.g. UDP header."]
 #[doc = " Use this if you intend to pass the pbuf to functions like udp_send()."]
 pub const pbuf_layer_PBUF_TRANSPORT: pbuf_layer = 74;
@@ -6798,6 +6804,13 @@ extern "C" {
         n: size_t,
     ) -> *mut ::std::os::raw::c_char;
 }
+extern "C" {
+    pub fn lwip_strnistr(
+        buffer: *const ::std::os::raw::c_char,
+        token: *const ::std::os::raw::c_char,
+        n: size_t,
+    ) -> *mut ::std::os::raw::c_char;
+}
 #[doc = " This is the aligned version of ip4_addr_t,"]
 #[doc = "used as local variable, on the stack, etc."]
 #[repr(C)]
@@ -7070,6 +7083,8 @@ pub type memp_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct memp_desc {
+    #[doc = " Textual description"]
+    pub desc: *const ::std::os::raw::c_char,
     #[doc = " Element size"]
     pub size: u16_t,
 }
@@ -7077,17 +7092,27 @@ pub struct memp_desc {
 fn bindgen_test_layout_memp_desc() {
     assert_eq!(
         ::std::mem::size_of::<memp_desc>(),
-        2usize,
+        16usize,
         concat!("Size of: ", stringify!(memp_desc))
     );
     assert_eq!(
         ::std::mem::align_of::<memp_desc>(),
-        2usize,
+        8usize,
         concat!("Alignment of ", stringify!(memp_desc))
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<memp_desc>())).size as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<memp_desc>())).desc as *const _ as usize },
         0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(memp_desc),
+            "::",
+            stringify!(desc)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<memp_desc>())).size as *const _ as usize },
+        8usize,
         concat!(
             "Offset of field: ",
             stringify!(memp_desc),
@@ -7443,6 +7468,7 @@ fn bindgen_test_layout_stats_igmp() {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct stats_mem {
+    pub name: *const ::std::os::raw::c_char,
     pub err: u16_t,
     pub avail: mem_size_t,
     pub used: mem_size_t,
@@ -7453,7 +7479,7 @@ pub struct stats_mem {
 fn bindgen_test_layout_stats_mem() {
     assert_eq!(
         ::std::mem::size_of::<stats_mem>(),
-        40usize,
+        48usize,
         concat!("Size of: ", stringify!(stats_mem))
     );
     assert_eq!(
@@ -7462,8 +7488,18 @@ fn bindgen_test_layout_stats_mem() {
         concat!("Alignment of ", stringify!(stats_mem))
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<stats_mem>())).err as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<stats_mem>())).name as *const _ as usize },
         0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(stats_mem),
+            "::",
+            stringify!(name)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<stats_mem>())).err as *const _ as usize },
+        8usize,
         concat!(
             "Offset of field: ",
             stringify!(stats_mem),
@@ -7473,7 +7509,7 @@ fn bindgen_test_layout_stats_mem() {
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<stats_mem>())).avail as *const _ as usize },
-        8usize,
+        16usize,
         concat!(
             "Offset of field: ",
             stringify!(stats_mem),
@@ -7483,7 +7519,7 @@ fn bindgen_test_layout_stats_mem() {
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<stats_mem>())).used as *const _ as usize },
-        16usize,
+        24usize,
         concat!(
             "Offset of field: ",
             stringify!(stats_mem),
@@ -7493,7 +7529,7 @@ fn bindgen_test_layout_stats_mem() {
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<stats_mem>())).max as *const _ as usize },
-        24usize,
+        32usize,
         concat!(
             "Offset of field: ",
             stringify!(stats_mem),
@@ -7503,7 +7539,7 @@ fn bindgen_test_layout_stats_mem() {
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<stats_mem>())).illegal as *const _ as usize },
-        32usize,
+        40usize,
         concat!(
             "Offset of field: ",
             stringify!(stats_mem),
@@ -9473,6 +9509,9 @@ extern "C" {
         netif: *mut netif,
     ) -> err_t;
 }
+extern "C" {
+    pub fn ip4_debug_print(p: *mut pbuf);
+}
 #[repr(C, packed)]
 #[derive(Debug, Copy, Clone)]
 pub struct ip6_addr_packed {
@@ -10061,10 +10100,70 @@ extern "C" {
 extern "C" {
     pub fn ip_input(p: *mut pbuf, inp: *mut netif) -> err_t;
 }
+#[doc = " The standard ICMP header (unspecified 32 bit data)"]
+#[repr(C, packed)]
+#[derive(Debug, Copy, Clone)]
+pub struct icmp_hdr {
+    pub type_: u8_t,
+    pub code: u8_t,
+    pub chksum: u16_t,
+    pub data: u32_t,
+}
+#[test]
+fn bindgen_test_layout_icmp_hdr() {
+    assert_eq!(
+        ::std::mem::size_of::<icmp_hdr>(),
+        8usize,
+        concat!("Size of: ", stringify!(icmp_hdr))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<icmp_hdr>(),
+        1usize,
+        concat!("Alignment of ", stringify!(icmp_hdr))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<icmp_hdr>())).type_ as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(icmp_hdr),
+            "::",
+            stringify!(type_)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<icmp_hdr>())).code as *const _ as usize },
+        1usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(icmp_hdr),
+            "::",
+            stringify!(code)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<icmp_hdr>())).chksum as *const _ as usize },
+        2usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(icmp_hdr),
+            "::",
+            stringify!(chksum)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<icmp_hdr>())).data as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(icmp_hdr),
+            "::",
+            stringify!(data)
+        )
+    );
+}
 #[doc = " This is the standard ICMP header only that the u32_t data"]
 #[doc = "  is split to two u16_t like ICMP echo needs it."]
-#[doc = "  This header is also used for other ICMP types that do not"]
-#[doc = "  use the data part."]
 #[repr(C, packed)]
 #[derive(Debug, Copy, Clone)]
 pub struct icmp_echo_hdr {

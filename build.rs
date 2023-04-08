@@ -3,6 +3,16 @@ use std::{path, env};
 extern crate bindgen;
 extern crate cc;
 
+// a extra flags parser which accept a callback to handle the flag
+fn apply_extra_flags<F>(mut callback: F)
+where
+    F: FnMut(&str),
+{
+    env::var("LWIP_FLAGS").unwrap_or_default().split_whitespace().for_each(|flag| {
+        callback(flag);
+    });
+}
+
 fn compile_lwip_library() {
     println!("cargo:rerun-if-changed=src/lwip");
     println!("cargo:rerun-if-changed=src/lwip-opts");
@@ -48,7 +58,9 @@ fn compile_lwip_library() {
         .file("src/lwip-opts/platform.c");
     build.include("src/lwip/src/include");
     build.include("src/lwip-opts");
-    build.flag(&env::var("LWIP_FLAGS").unwrap_or_default());
+    apply_extra_flags(|flag| {
+        build.flag(flag);
+    });
     build.debug(false);
     build.compile("liblwip.a");
 }
@@ -66,7 +78,7 @@ fn generate_lwip_bindings() {
         .header("src/lwip/src/include/lwip/ip_addr.h")
         .clang_arg("-Isrc/lwip/src/include")
         .clang_arg("-Isrc/lwip-opts")
-        .clang_arg(&env::var("LWIP_FLAGS").unwrap_or_default())
+        .clang_args(env::var("LWIP_FLAGS").unwrap_or_default().split_whitespace().collect::<Vec<_>>())
         .parse_callbacks(Box::new(bindgen::CargoCallbacks));
     let mut out_path = path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     out_path.push("src");
