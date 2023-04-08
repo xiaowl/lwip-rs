@@ -76,14 +76,14 @@
 // is used regardless of the platform
 #define IPV6_FRAG_COPYHEADER 1
 
-/*
+#ifdef LWIP_DEBUG
 #define LWIP_DEBUG 1
 #define IP_DEBUG LWIP_DBG_ON
 #define NETIF_DEBUG LWIP_DBG_ON
 #define TCP_DEBUG LWIP_DBG_ON
 #define TCP_INPUT_DEBUG LWIP_DBG_ON
 #define TCP_OUTPUT_DEBUG LWIP_DBG_ON
-*/
+#endif
 
 #ifdef ANDROID
 #include <android/log.h>

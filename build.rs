@@ -1,4 +1,4 @@
-use std::path;
+use std::{path, env};
 
 extern crate bindgen;
 extern crate cc;
@@ -48,6 +48,7 @@ fn compile_lwip_library() {
         .file("src/lwip-opts/platform.c");
     build.include("src/lwip/src/include");
     build.include("src/lwip-opts");
+    build.flag(&env::var("LWIP_FLAGS").unwrap_or_default());
     build.debug(false);
     build.compile("liblwip.a");
 }
@@ -65,6 +66,7 @@ fn generate_lwip_bindings() {
         .header("src/lwip/src/include/lwip/ip_addr.h")
         .clang_arg("-Isrc/lwip/src/include")
         .clang_arg("-Isrc/lwip-opts")
+        .clang_arg(&env::var("LWIP_FLAGS").unwrap_or_default())
         .parse_callbacks(Box::new(bindgen::CargoCallbacks));
     let mut out_path = path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     out_path.push("src");
