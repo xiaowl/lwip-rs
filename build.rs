@@ -76,6 +76,7 @@ fn generate_lwip_bindings() {
         .header("src/lwip/src/include/lwip/udp.h")
         .header("src/lwip/src/include/lwip/netif.h")
         .header("src/lwip/src/include/lwip/ip_addr.h")
+        .header("src/lwip/src/include/lwip/prot/tcp.h")
         .clang_arg("-Isrc/lwip/src/include")
         .clang_arg("-Isrc/lwip-opts")
         .clang_args(env::var("LWIP_FLAGS").unwrap_or_default().split_whitespace().collect::<Vec<_>>())

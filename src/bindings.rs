@@ -1204,7 +1204,7 @@ pub const NETIF_FLAG_ETHARP: u32 = 8;
 pub const NETIF_FLAG_ETHERNET: u32 = 16;
 pub const NETIF_FLAG_IGMP: u32 = 32;
 pub const NETIF_FLAG_MLD6: u32 = 64;
-pub const NETIF_FLAG_ACCEPT_ALL: u32 = 256;
+pub const NETIF_FLAG_ACCEPT_ALL: u32 = 128;
 pub const NETIF_ADDR_IDX_MAX: u32 = 127;
 pub const LWIP_NETIF_USE_HINTS: u32 = 0;
 pub const NETIF_NO_INDEX: u32 = 0;
@@ -1289,6 +1289,17 @@ pub const TF_NODELAY: u32 = 64;
 pub const TF_NAGLEMEMERR: u32 = 128;
 pub const TF_RTO: u32 = 2048;
 pub const TCP_SNDQUEUELEN_OVERFLOW: u32 = 65532;
+pub const TCP_HLEN: u32 = 20;
+pub const TCP_FIN: u32 = 1;
+pub const TCP_SYN: u32 = 2;
+pub const TCP_RST: u32 = 4;
+pub const TCP_PSH: u32 = 8;
+pub const TCP_ACK: u32 = 16;
+pub const TCP_URG: u32 = 32;
+pub const TCP_ECE: u32 = 64;
+pub const TCP_CWR: u32 = 128;
+pub const TCP_FLAGS: u32 = 63;
+pub const TCP_MAX_OPTION_BYTES: u32 = 40;
 extern "C" {
     pub fn android_get_application_target_sdk_version() -> ::std::os::raw::c_int;
 }
@@ -11547,6 +11558,111 @@ extern "C" {
         addr: *mut ip_addr_t,
         port: *mut u16_t,
     ) -> err_t;
+}
+#[repr(C, packed)]
+#[derive(Debug, Copy, Clone)]
+pub struct tcp_hdr {
+    pub src: u16_t,
+    pub dest: u16_t,
+    pub seqno: u32_t,
+    pub ackno: u32_t,
+    pub _hdrlen_rsvd_flags: u16_t,
+    pub wnd: u16_t,
+    pub chksum: u16_t,
+    pub urgp: u16_t,
+}
+#[test]
+fn bindgen_test_layout_tcp_hdr() {
+    assert_eq!(
+        ::std::mem::size_of::<tcp_hdr>(),
+        20usize,
+        concat!("Size of: ", stringify!(tcp_hdr))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<tcp_hdr>(),
+        1usize,
+        concat!("Alignment of ", stringify!(tcp_hdr))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<tcp_hdr>())).src as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(tcp_hdr),
+            "::",
+            stringify!(src)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<tcp_hdr>())).dest as *const _ as usize },
+        2usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(tcp_hdr),
+            "::",
+            stringify!(dest)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<tcp_hdr>())).seqno as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(tcp_hdr),
+            "::",
+            stringify!(seqno)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<tcp_hdr>())).ackno as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(tcp_hdr),
+            "::",
+            stringify!(ackno)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<tcp_hdr>()))._hdrlen_rsvd_flags as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(tcp_hdr),
+            "::",
+            stringify!(_hdrlen_rsvd_flags)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<tcp_hdr>())).wnd as *const _ as usize },
+        14usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(tcp_hdr),
+            "::",
+            stringify!(wnd)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<tcp_hdr>())).chksum as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(tcp_hdr),
+            "::",
+            stringify!(chksum)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<tcp_hdr>())).urgp as *const _ as usize },
+        18usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(tcp_hdr),
+            "::",
+            stringify!(urgp)
+        )
+    );
 }
 pub type __uint128_t = u128;
 #[repr(C)]
